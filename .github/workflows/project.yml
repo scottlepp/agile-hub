@@ -1,0 +1,17 @@
+name: Log latest release
+on:
+  project_card:
+    types: [edited]
+
+jobs:
+  logLatestRelease:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/request-action@v2.x
+        id: get_latest_release
+        with:
+          route: GET /repos/:repository/releases/latest
+          repository: ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo card edited"
