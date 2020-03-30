@@ -1,0 +1,17 @@
+{
+  "include": ["./src", "src/index.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "rootDir": "./src",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "typeRoots": ["./node_modules/@types"],
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    // "importHelpers": true,
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "crawl",
+  "version": "1.0.0",
+  "description": "crawl car sites",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "dev": "tsc && node dist/index.js",
+    "build": "tsc"
+  },
+  "author": "scott",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^13.1.6",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.0",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.7.4"
+  },
+  "devDependencies": {
+    "tslib": "^1.10.0"
+  }
+}
