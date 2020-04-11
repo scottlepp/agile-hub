@@ -6,6 +6,7 @@
   "scripts": {
     "test": "test",
     "fetch": "tsc && node dist/index.js fetch",
+    "clean": "tsc && node dist/index.js clean",
     "analyze": "tsc && node dist/index.js analyze",
     "build": "tsc"
   },

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import pathUtil from 'path';
 
-function doClean() {
+export function doClean() {
   const dataFile = pathUtil.join(__dirname, '../data/projects.json');
   // const data = fs.readFileSync(dataFile);
   const projects = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
@@ -44,6 +44,15 @@ function flatten(data) {
           event.started = card.started;
           event.count = 1;
           event.title = card.title;
+          event.points = 1;
+
+          if (event.effort !== undefined && event.effort !== "") {
+            const sizes = {
+              small: 1, medium: 2, large: 3, "x-large": 5
+            }
+            event.points = sizes[event.effort]
+          }
+
           events.push(event);
         }
       }
