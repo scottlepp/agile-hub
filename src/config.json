@@ -1,0 +1,7 @@
+{
+  "org": "grafana",
+  "allProjects": false,
+  "projects": [
+    {"id": 3545663, "name": "Plugins/Integrations Team"}
+  ]
+}

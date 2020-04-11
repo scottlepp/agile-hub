@@ -12,6 +12,7 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "outDir": "dist",
+    "resolveJsonModule": true,
     // "importHelpers": true,
   }
 }
