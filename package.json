@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "dev": "tsc && node dist/index.js",
+    "fetch": "tsc && node dist/index.js fetch",
+    "analyze": "tsc && node dist/index.js analyze",
     "build": "tsc"
   },
   "author": "scott",
