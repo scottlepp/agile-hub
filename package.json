@@ -1,7 +1,7 @@
 {
-  "name": "crawl",
+  "name": "scrum-hum",
   "version": "1.0.0",
-  "description": "crawl car sites",
+  "description": "agile github projects",
   "main": "index.js",
   "scripts": {
     "test": "test",

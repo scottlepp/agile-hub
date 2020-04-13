@@ -35,13 +35,18 @@ function flatten(data) {
           // only use the most recent event - sort by date first?
           const event = card.events[card.events.length - 1];
           event.issue = card.content_url;
-          event.card_created = card.created_at;
-          event.card_updated = card.updated_at;
+          event.card_created = stringDateToMillis(card.created_at);
+          event.card_updated = stringDateToMillis(card.updated_at);
           event.status = column.name;
           event.project = project.name;
 
           event.effort = card.effort;
-          event.started = card.started;
+          if (card.started) {
+            event.started = card.started;
+          }
+          if (card.ended) {
+            event.ended = card.ended;
+          }
           event.count = 1;
           event.title = card.title;
           event.points = 1;
@@ -51,6 +56,20 @@ function flatten(data) {
               small: 1, medium: 2, large: 3, "x-large": 5
             }
             event.points = sizes[event.effort]
+          }
+
+          if (card.issue && card.issue.repository_url) {
+            const repoPath = card.issue.repository_url.split('/');
+            card.repo = repoPath[repoPath.length -1];
+            event.repo = card.repo;
+          }
+
+          if (card.issue && card.issue.assignee) {
+            event.assignee = card.issue.assignee.login;
+          }
+
+          if (card.bug) {
+            event.bug = true;
           }
 
           events.push(event);
@@ -114,14 +133,29 @@ function clean(data) {
             card.effort = "";
           }
 
+          if (event.label && event.label.name === "bug") {
+            card.bug = true;
+          }
+
           if (card.started === undefined) {
             card.started = null;
           }
 
           if (event.event === 'moved_columns_in_project') {
             if (event.project_card && event.project_card.column_name === "In progress") {
-              event.started = event.created_at;
+              event.started = stringDateToMillis(event.created_at);
               card.started = event.started;
+            }
+
+            // TODO - config
+            const devDone = ['In Review', 'Needs Release', 'Done'];
+            if (event.project_card && devDone.includes(event.project_card.column_name)) {
+              console.log('ended at ' + event.created_at)
+              console.log(event);
+              event.ended_at = event.created_at;
+              card.ended_at = event.created_at;
+              event.ended = stringDateToMillis(event.ended_at);
+              card.ended = event.ended;
             }
           }
 
@@ -149,4 +183,11 @@ function clean(data) {
     }
   }
   return projects;
+}
+
+function stringDateToMillis(value) {
+  if (value !== undefined && value !== null) {
+    return Date.parse(value);
+  }
+  return value;
 }
