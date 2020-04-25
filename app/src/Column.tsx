@@ -12,11 +12,11 @@ function Column(props: any) {
   });
 
   return (
-    <BorderBox height={'calc(100vh - 122px)'} bg="gray.1" p={2}>
+    <BorderBox height={'calc(100vh - 122px)'} bg="gray.1" p={2} display="flex" style={{flexDirection: 'column'}}>
       Column {props.name}
       <Droppable droppableId={props.id}>
         {(provided) => (
-          <Box {...provided.droppableProps} ref={provided.innerRef}>
+          <Box {...provided.droppableProps} ref={provided.innerRef} style={{flex: 1}}>
             {state.cards.map((card: any, index) =>
               (<Card {...card} index={index}></Card>)
             )}
