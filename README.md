@@ -1,3 +1,3 @@
-# scrum-hub
+# agile-hub
 
-test
+Allow sprints to be managed across repos.
